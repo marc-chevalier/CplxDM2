@@ -57,22 +57,36 @@ Moreover, $NAE-3-SAT$ is clearly $NP$: a valid assignation is a sufficient witne
 
 \section{Difference of NP problems}
 
-\begin{lemma}\label{3:1}
+\begin{propo}\label{3:1}
     \textsc{ExactIndSet} is in DP.
-\end{lemma}
+\end{propo}
 \begin{proof}
     Let $A$ be the set of all pairs $(G, k)$ such that $G$ has an independent set of size at least $k$, and let $B$ be the set of all pairs $(G, k)$ such $G$ has a independent set of size at least $k+1$. Then $\textsc{ExactIndSet}=A \setminus B$ and $A$ is in NP and $B$ is in NP. Hence by definition of $DP$, \textsc{ExactIndSet} is in $DP$.
 \end{proof}
 
-\begin{lemma}\label{3:2}
+\begin{propo}\label{3:2}
     $\forall L \in DP$, $L$ is polynomial-time reducible to \textsc{ExactIndSet}.
-\end{lemma}
+\end{propo}
 \begin{proof}
-    We note that the reduction given in class from $3-SAT$ to \textsc{IndSet} took an instance $\varphi$ of $3-SAT$ consisting of $m$ clauses each of three literals and produced a graph $G$ $\varphi$ with $3 m$ nodes such that if $\varphi$ is satisfiable then the largest independent set in $G$ has m nodes, and if $G$ is unsatisfiable then the largest independent set of $G$ has at most $m - 1$ nodes. 
+    \begin{lemma}
+        $\textsc{IndSet} \geqslant_p 3-SAT$
+    \end{lemma}
+    \begin{proof}
+        Suppose we have an instance $F$ of $3-SAT$ problem where $F=\bigwedge\limits_{i=1}^m C_i$ where $C_i$ is the disjunction of 3 variables. We note $x_1,\ldots,x_n$ the variables. We create the graph $G$ as follows:
+        \begin{itemize}
+            \item For each variable in each clause, create a vertex, which we will label with the name of the variable. Therefore there may be multiple vertexs with the label $x_i$ or $\neg x_i$, if these variables appear in multiple clauses.
+            \item For each clause, add an edge between the three vertices corresponding the variables from that clause.
+            \item For all $i$, add an edge between every pair of vertexs with one is labelled with $x_i$ and the other labelled with $x_i$.
+        \end{itemize}
+        
+        There is a independent set of size $m$ in $G$ if and only if $F$ is satisfiable.    
+    \end{proof}
     
-    Now suppose that $A$ is in $DP$. We want to show that $A \leqslant_p \textsc{ExactIndSet}$. By definition of $DP$, $A = L_1 \setminus L_2$ for $(L_1,L_2) \in NP^2$. Since $3-SAT$ is $NP$-complete, there are polytime functions $f_1$ , $f_2$ such that for $i = 1$ , $2$ and for all  $x \in \set{ 0 , 1 }^\star$ we have $x \in L_i \Leftrightarrow f_i ( x ) \in 3 SAT$. Hence for each fixed $x \in \set{ 0 , 1 }^\star$ , setting $\varphi_i = f_i(x)$, we have  $x \in L_i \Leftrightarrow \varphi_i$ is satisfiable Thus from the above reduction to \textsc{IndSet}, there is a polytime function which takes $x$ to a pair of graphs $G_1$, $G_2$ such that if $m_i$ is the number of clauses in $\varphi_i$, then for $i = 1$ , $2$, no independent set in $G_i$ has more than $m_i$ nodes, and $x \in  L_i \Leftrightarrow$ the largest independent set in $G_i$ has size $m_i$.
+    We note that this reduction from $3-SAT$ to \textsc{IndSet} took an instance $\varphi$ of $3-SAT$ consisting of $m$ clauses each of three literals and produced a graph $G_\varphi$ with $3 m$ vertexs such that if $\varphi$ is satisfiable then the largest independent set in $G$ has m vertexs, and if $G$ is unsatisfiable then the largest independent set of $G$ has at most $m - 1$ vertices. 
     
-    Now we use the notation$ G\sqcup H$ for the disjoint union of graphs $G$ and $H$. That is, the vertices in $G\sqcup H$ are the disjoint union of those in $G$ and $H$, and similarly for the edges. Now let $G'_1=G_1\sqcup G_1$ Then a maximum independent set in $G'_1$ is the union of maximum independent sets in the two copies of $G_1$. Thus $x\in L_1\Rightarrow$ maximum independent set of $G'_1$ is $2m_1$ and $x\in \overline{L_1} \Rightarrow$ maximum independent set of $G'_1$ is $\leqslant 2m_1-2$. Now define $G'_2$ so that its nodes are those of $G_2$ together with $m_2-1$ new nodes, and the edges consist of those of $G_2$ together with an edge from each of the new nodes to every node of $G_2$. Then we have designed $G'2$ so that no independent set can contain both nodes of $G_2$ and new nodes, so $x\in L_2 \Rightarrow$ maximum independent set of $G'_2$ is $m_2$, $x\in \overline{L_2} \Rightarrow$ maximum independent set of $G'_2$ is $m_2-1$. Now let $G_3=G'_1\sqcup G'_2$ and let $k= 2m_1+m_2-1$. To finish the proof that $A\leqslant_p DP$, it suffices to show that 
+    Now suppose that $A$ is in $DP$. We want to show that $A \leqslant_p \textsc{ExactIndSet}$. By definition of $DP$, $A = L_1 \setminus L_2$ for $(L_1,L_2) \in NP^2$. Since $3-SAT$ is $NP$-complete, there are polytime functions $f_1$ , $f_2$ such that for $i = 1$ , $2$ and for all  $x \in \set{ 0 , 1 }^\star$ we have $x \in L_i \Leftrightarrow f_i ( x ) \in 3 SAT$. Hence for each fixed $x \in \set{ 0 , 1 }^\star$ , setting $\varphi_i = f_i(x)$, we have  $x \in L_i \Leftrightarrow \varphi_i$ is satisfiable Thus from the above reduction to \textsc{IndSet}, there is a polytime function which takes $x$ to a pair of graphs $G_1$, $G_2$ such that if $m_i$ is the number of clauses in $\varphi_i$, then for $i = 1$ , $2$, no independent set in $G_i$ has more than $m_i$ vertices, and $x \in  L_i \Leftrightarrow$ the largest independent set in $G_i$ has size $m_i$.
+    
+    Now we use the notation$ G\sqcup H$ for the disjoint union of graphs $G$ and $H$. That is, the vertices in $G\sqcup H$ are the disjoint union of those in $G$ and $H$, and similarly for the edges. Now let $G'_1=G_1\sqcup G_1$ Then a maximum independent set in $G'_1$ is the union of maximum independent sets in the two copies of $G_1$. Thus $x\in L_1\Rightarrow$ maximum independent set of $G'_1$ is $2m_1$ and $x\in \overline{L_1} \Rightarrow$ maximum independent set of $G'_1$ is $\leqslant 2m_1-2$. Now define $G'_2$ so that its vertices are those of $G_2$ together with $m_2-1$ new vertices, and the edges consist of those of $G_2$ together with an edge from each of the new vertices to every vertex of $G_2$. Then we have designed $G'2$ so that no independent set can contain both vertices of $G_2$ and new vertices, so $x\in L_2 \Rightarrow$ maximum independent set of $G'_2$ is $m_2$, $x\in \overline{L_2} \Rightarrow$ maximum independent set of $G'_2$ is $m_2-1$. Now let $G_3=G'_1\sqcup G'_2$ and let $k= 2m_1+m_2-1$. To finish the proof that $A\leqslant_p DP$, it suffices to show that 
     
     \begin{lemma}
         $$x\in A\Leftrightarrow(G_3, k)\in DP$$

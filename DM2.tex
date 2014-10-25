@@ -53,6 +53,30 @@ Consequently, $SAT \leqslant_p NAE-3-SAT$ and $NAE-3-SAT$ is $NP$-hard.
 
 Moreover, $NAE-3-SAT$ is clearly $NP$: a valid assignation is a sufficient witness. We can check in polynomial time if this assignation makes the formula true and if the "not all equal" condition is satisfied. Then $NAE-3-SAT$ is $NP$-complete.
 
+\subsection{\textsc{MaxCut}}
+
+Let $F$ be an instance of $NAE-3-SAT$
+$$
+    F=\bigwedge\limits_{i=1}^m C_i
+$$
+
+We produce a graph $G=(V,E)$ which has a vertex for each literal of $F$. There is a edge between two vertices if there is a clause which contains this two literals. So each clause is described by a triangle. Moreover, we add $\vert F\vert_{x_i}$ (the number of occurrences of $x_i$ in $F$) edges between $x_i$ and $\neg x_i$. The size of the cut we search is at least $5m$.
+
+If we have an assignment of the $NAE-3-SAT$, we take the vertices which are true in $S$ and the other in $\overline{S}$. So, we have $2m$ from the triangles due to the clauses and $3m$ from the edges between all pair $(x_i,\neg x_i)$.
+
+Reciprocally, if we have a cut of size $\geqslant 5m$.
+
+If we have no pair $(x_i, \neg x_i)$ on the same size, we have a valid assignment.
+
+If there is a such pair, we can move one of them on the opposite side without decreasing the size of the cut. Let $n_i$ the number of edges between $x_i$ and $\neg x_i$. We note $a$ the number of edges which $x_i$ is an extremity and which the other is in the opposite side. We note $b$ the number of edges between $b$ and a vertex of the opposite size. We know that $a+b \leqslant 2n_i$. If we move $x_i$ in the opposite size, the cut gains $n_i-a$ edges. If $\neg x_i$ go to the opposite side, it gains $n_i-b$. $\max(n_i-a,n_i-b)\geqslant 0$, so we can move one of these vertices to the opposite side without decreasing the size of the cut. We redo this transformation until we reach a cut of the first case (at most $m$ times).
+
+We proved that $NAE-3-SAT \leqslant_p \textsc{MaxCut}$.
+
+Moreover, $\textsc{MaxCut}$ is in $\NP$. Indeed, a witness is the list of the vertices of $S$ (or $\overline{S}$). The size is actually polynomial with respect of the size of $G$ and we can check the solution in a polynomial time : we check easily that the cut has a size $\geqslant k$ in a quadratic time.
+
+So, $\textsc{MaxCut}\in\NP$.
+
+
 \section{Reductions}
 
 \section{Difference of NP problems}

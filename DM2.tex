@@ -98,6 +98,7 @@ So, $\textsc{MaxCut}\in\NP$.
 \end{propo}
 \begin{proof}
     Let $M$ a \textsc{Turing} machine with oracle $\textsc{Tautology}$. We will make that machine decide $SAT$ in polynomial time.
+    
     This machine take a formula $\varphi$ compute the negation $\neg\varphi$ and test with its oracle if $\neg\varphi$ is a tautology. If it is not, there is a assignment which make $\neg\varphi$ false, so this assignment make $\varphi$ true and $\varphi$ is satisfiable. If $\neg\varphi$ is a tautology, $\varphi$ is not satisfiable.
 
     So $M$ decide $SAT$ and $\textsc{Tautology}$ is $\NP$-hard.
@@ -204,6 +205,38 @@ If we actually write the padded input $x\diamondsuit^{2^{\lvert x \rvert^c}}$ on
 \section{Downward self-reducibility}
 
 \section{Space hierarchy theorem}
+
+\begin{thm}\label{6:1}
+    There is a universal \textsc{Turing} machine $\mathcal{U}$ such that $\mathcal{U}(\alpha,x) = M_\alpha(x)$ and $\mathcal{U}$ halts on every input $(\alpha,x)$ after using at most $c S(|x|)$ space, where $S$ is the computation space of $M_\alpha$ and $c$ is some constant not depending on $x$.
+\end{thm}
+
+\begin{thm}
+    For every space-constructible function $f:\NN \to \NN$,    
+    $$
+        \dSpace\left(o(f(n))\right) \subsetneq \dSpace(f(n))
+    $$
+\end{thm}
+\begin{proof}
+Let $f:\NN\to\NN$ be a space constructible function and $g:\NN\to\NN$ such that $g=o(f)$
+
+We note $M$ a deterministic \textsc{Turing} machine. $M$'s computation:
+\begin{itemize}
+    \item $M$ writes $1^{f(n)}$ symbols on a work tape, where $n$ is the input's size.
+    \item Simulate $\mathcal{U}(\alpha,(\alpha,x))$, and stops at most when the machine go out of the previous marks.
+    \item If the computation of $\mathcal{U}(\alpha,(\alpha,x))$ is not terminated $M$ rejects.
+    \item Otherwise, outputs the opposite result of $\mathcal{U}(\alpha,(\alpha,x))$
+\end{itemize}
+
+    The first step takes a space $f(n)$. The second step takes also a space $f(n)$ (thanks to the restriction). Finally, $M$ runs in space $\cplx{f(n)}$.
+
+    We note $\L(M)$ the language recognized by $M$ ($\L(M)\in\dSpace(f(n))$) and assume that there is a deterministic machine $N$ such that $\L(M)= \L(N)$ and $N$ runs in space $g(n)$. We denote by $\alpha_0$ the code of $N$.
+
+    According to the theorem \ref{6:1}, for every word $x$, $\mathcal{U}(\alpha_0,(\alpha_0,x))$ uses less than $c g(|(\alpha_0,x)|)$ space. And, by hypothesis, $c g(|(\alpha_0,x)|) \leqslant f(|(\alpha_0,x)|)$ for large enough $x$.
+
+    Thus, for large enough $x$ we have $M(\alpha_0,x) = \neg\mathcal{U}(\alpha_0,(\alpha_0,x)) = \neg N(\alpha_0,x)$. This is a contradiction since we have assumed $\L(M)= \L(N)$.
+  
+  In conclusion, there exists no machine $N$ that runs in space $\cplx{g(n)}$ and recognizes $\L(M)$. Since we have proved $\L(M) \in \dSpace(f(n))$, we obtained $\dSpace (g(n)) \subsetneq \dSpace(f(n))$.
+\end{proof}
 
 \section{Polynomial hierarchy}
 

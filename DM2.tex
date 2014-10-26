@@ -97,7 +97,10 @@ So, $\textsc{MaxCut}\in\NP$.
     $\textsc{Tautology}$ is $\NP$-hard.
 \end{propo}
 \begin{proof}
+    Let $M$ a \textsc{Turing} machine with oracle $\textsc{Tautology}$. We will make that machine decide $SAT$ in polynomial time.
+    This machine take a formula $\varphi$ compute the negation $\neg\varphi$ and test with its oracle if $\neg\varphi$ is a tautology. If it is not, there is a assignment which make $\neg\varphi$ false, so this assignment make $\varphi$ true and $\varphi$ is satisfiable. If $\neg\varphi$ is a tautology, $\varphi$ is not satisfiable.
 
+    So $M$ decide $SAT$ and $\textsc{Tautology}$ is $\NP$-hard.
 \end{proof}
 
 \section{Difference of NP problems}

@@ -17,7 +17,7 @@ Let be $\varphi$ an instance of SAT problem. We denote by $n$ the number of vari
 
 Let be $M$ a \textsc{Turing} machine which tests in a cycle all the $2^n$ possible assignations of the previous formula : when $M$ has tested all assignations, it starts again. This machine halts if and only if $\varphi$ is satisfiable. This reduction is polynomial, therefore $SAT \leqslant_p \textsc{Halt}$, ie. $\textsc{Halt}$ is $NP$-hard since $SAT$ is $NP$-hard.
 
-$\textsc{Halt}$ is not $NP$-complete otherwise it was decidable by a \textsc{Turing}-machine, but $\textsc{Halt}$ is unsatisfiable.
+$\textsc{Halt}$ is not $NP$-complete otherwise it was decidable by a \textsc{Turing}-machine, but $\textsc{Halt}$ is undecidable.
 
 \subsection{\texorpdfstring{$TQBF$}{TQBF}}
 
@@ -78,6 +78,27 @@ So, $\textsc{MaxCut}\in\NP$.
 
 
 \section{Reductions}
+\begin{propo}
+    The set of the recursive languages is closed under polynomial-time \textsc{Karp} reduction.
+\end{propo}
+\begin{proof}
+    That is obvious, isn't it ?
+\end{proof}
+\begin{propo}
+    $\textsc{DLogTime}$ is not closed under polynomial-time \textsc{Karp} reduction.
+\end{propo}
+\begin{proof}
+    Let $\L \in \textsc{DLogTime}$ such that $\lvert \L \rvert \geqslant 2$. For all $\L' \in \pTime\setminus\textsc{DLogTime}$ (there is at least one), there is a polynomial time function $g:\L' \to \set{0,1}$, $x\in\L' \Leftrightarrow g(x) = 1$. Let $\varphi$ a bijection between $\set{0,1}$ and $\set{a,b}$ where $(a,b)\in\L\times\overline{\L}$. We have $x\in\L' \Leftrightarrow \varphi\circ g(x) = \varphi(a)$ ie. $x\in\L' \Leftrightarrow \varphi\circ g(x)\in\L$.
+    
+    So, $\textsc{DLogTime}$ is not close under polynomial-time \textsc{Karp} reduction.
+\end{proof}
+
+\begin{propo}
+    $\textsc{Tautology}$ is $\NP$-hard.
+\end{propo}
+\begin{proof}
+
+\end{proof}
 
 \section{Difference of NP problems}
 

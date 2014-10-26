@@ -135,6 +135,48 @@ So, $\textsc{MaxCut}\in\NP$.
 
 \section{Classes with exponential resources}
 
+We name \textsc{BoundedHalt} the language of 3-tuples $\langle M,x,k\rangle$ where the machine $M$ halts on input $x$ in $k$ steps.
+
+\begin{thm}
+    \textsc{BoundedHalt} is $\Exp$-complete.
+\end{thm}
+\begin{proof}
+
+\begin{lemma}\label{4:1}
+    $\textsc{BoundedHalt} \in \Exp$.
+\end{lemma}
+\begin{proof}
+Let $\langle M,x,k\rangle$ an instance of \textsc{BoundedHalt}.
+
+We simulate $M$ on $x$ for $k$ steps and accepts if and only if $M$ halts and rejects otherwise. The running time is $m^{\cplx{1}}$. Let $n = \vert \langle\alpha,x,k\rangle \vert \geqslant \log k$. Therefore, the running time $\leqslant m^c = 2^{c\log m} \leqslant 2^{cn}$.
+\end{proof}
+
+\begin{lemma}\label{4:2}
+    \textsc{BoundedHalt} is $\Exp$-hard.
+\end{lemma}
+\begin{proof}
+For each language $\L \in \EXP$, we need to give polytime reduction from $\L$ to \textsc{BoundedHalt}. For a given language $\L \in \EXP$, we know there is a \textsc{Turing machine} $M_\L$ that decides A in time $g(n) \leqslant 2^{n^k}$ for a $c\in\NN$.
+
+Let $f$ such that $f(w) = \langle M_\L, w, m\rangle$ where $m = 2^{|w|^c}$.
+
+$f$ is polytime computable and $w \in \L \Rightarrow \langle M_\L, w, m\rangle \in \textsc{BoundedHalt}$ and $w \not\in \L \Rightarrow \langle M_\L, w, m\rangle \not\in \textsc{BoundedHalt}$
+\end{proof}
+    \textsc{BoundedHalt} is in $\Exp$ (lemma \ref{4:1}) and it is $\Exp$-hard (lemma \ref{4:2}).
+\end{proof}
+
+\begin{thm}
+    $$\LogSpace=\P \Rightarrow \pSpace = \Exp$$
+\end{thm}
+\begin{proof}
+Take an arbitrary $\L \in \Exp$, decided by a \textsc{Turing} machine in time $2^{n^c}$.
+
+Let $L_{pad}:=\set{x\diamondsuit^{2^{\lvert x \rvert^c}} \mid x \in \L}$. We have $L_{pad} \in \P$ and, by the assumption $\P=\LogSpace$, we found that $L_{pad} \in \LogSpace$. So, there is some \textsc{Turing} machine $M_0$ deciding $L_{pad}$ in space $\log n$. $M_0$ can be used to decide $L$: on input $x$, simulate $M_0$ on the padded input $x\diamondsuit^{2^{\lvert x \rvert^c}}$ accept if and only if $M_0$ accepts.
+
+The space we used on input $x$ ($\vert x\vert=n$) is the space used by $M_0$ on the padded input $x\diamondsuit^{2^{\lvert x \rvert^c}}$ of size $n + 2^{n^c}$, which is at most $\log\left(2^{n^c+1}\right) = n^c + 1$, a polynomial. Hence, we have that $\L \in \pSpace$. 
+
+If we actually write the padded input $x\diamondsuit^{2^{\lvert x \rvert^c}}$ on the work tape, this would make the space usage exponential in $n$. But, we don't need to write entirely this padded input. We know what it looks like to the right of $x$. So we can simulate $M_0$ on the virtual padded input $x\diamondsuit^{2^{\lvert x \rvert^c}}$ by using a counter which tells the position on the tape of $M_0$. If $M_0$ enquires about the position to the right of $x$, we respond with the symbol $\diamondsuit$ (or the blank, if $M_0$ goes to the right of the entire padded input). Since the counter can assume the value at most $2^{n^c}$, we need at most $n^c$ bits for the counter. Thus, this new \textsc{Turing} machine uses space at most polynomial in $n$.
+\end{proof}
+
 \section{Downward self-reducibility}
 
 \section{Space hierarchy theorem}

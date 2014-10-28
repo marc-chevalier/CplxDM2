@@ -45,8 +45,9 @@
 
 \newcounter{ThComp}
 \newcounter{DefComp}
+\newcounter{NotComp}
 
-\newtheorem{definition}[ThComp]{Definition}
+\newtheorem{definition}[DefComp]{Definition}
 \newtheorem{theoreme}[ThComp]{Theorem}
 \newtheorem{proposition}[ThComp]{Proposition}
 
@@ -57,7 +58,7 @@
 \newtheorem{propo}[ThComp]{Proposition}
 %\newtheorem{proposition}[ThComp]{Proposition}
 \newtheorem{lemma}[ThComp]{Lemma}
-\newtheorem*{corol}{Corollary}
+\newtheorem{corol}[ThComp]{Corollary}
 \newtheorem{prop}[ThComp]{Property}
 \newtheorem{property}[ThComp]{Property}
 \theoremstyle{definition}
@@ -65,6 +66,7 @@
 \newtheorem*{exs}{Examples}
 \newtheorem{exo}{Exercise}
 \newtheorem{defi}[DefComp]{Definition}
+\newtheorem{notation}[NotComp]{Notation}
 %\newtheorem{definition}[DefComp]{Definition}
 \newtheorem{algo}{Algorithm}
 \theoremstyle{remark}

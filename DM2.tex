@@ -19,11 +19,19 @@ Let be $M$ a \textsc{Turing} machine which tests in a cycle all the $2^n$ possib
 
 $\textsc{Halt}$ is not $NP$-complete otherwise it was decidable by a \textsc{Turing}-machine, but $\textsc{Halt}$ is undecidable.
 
+\begin{theorem}
+    \textsc{Halt} is $\NP$-hard but not $\NP$-complete
+\end{theorem}
+
 \subsection{\texorpdfstring{$TQBF$}{TQBF}}
 
 All instance of $SAT$ problem is an instance of $TQBF$. Without transformation, we have a polynomial reduction, ie. $SAT\leqslant_p TQBF$ so $TQBF$ is $NP$-hard.
 
 This problem is known for being $\pSpace$-complete. It's not $\NP$-complete.
+
+\begin{theorem}
+    $TQBF$ is $\NP$-hard but not $\NP$-complete
+\end{theorem}
    
 \subsection{\texorpdfstring{$NAE-3-SAT$}{NAE-3-SAT}}
 
@@ -53,6 +61,11 @@ Consequently, $SAT \leqslant_p NAE-3-SAT$ and $NAE-3-SAT$ is $NP$-hard.
 
 Moreover, $NAE-3-SAT$ is clearly $NP$: a valid assignation is a sufficient witness. We can check in polynomial time if this assignation makes the formula true and if the "not all equal" condition is satisfied. Then $NAE-3-SAT$ is $NP$-complete.
 
+\begin{theorem}
+    $NAE-3-SAT$ is $\NP$-complete
+\end{theorem}
+   
+
 \subsection{\textsc{MaxCut}}
 
 Let $F$ be an instance of $NAE-3-SAT$
@@ -76,6 +89,10 @@ Moreover, $\textsc{MaxCut}$ is in $\NP$. Indeed, a witness is the list of the ve
 
 So, $\textsc{MaxCut}\in\NP$.
 
+\begin{theorem}
+    $\textsc{MaxCut}$ is $\NP$-complete
+\end{theorem}
+   
 
 \section{Reductions}
 \begin{propo}
@@ -204,6 +221,41 @@ If we actually write the padded input $x\diamondsuit^{2^{\lvert x \rvert^c}}$ on
 
 \section{Downward self-reducibility}
 
+\begin{notation}
+    We note $\textsc{Dsr}$ the set of downward self-reducible languages.
+\end{notation}
+
+\begin{propo}
+    $\P \subseteq \textsc{Dsr}$
+\end{propo}
+\begin{proof}
+    Without query to the oracle, we can decide every language of $\P$.
+\end{proof}
+
+\begin{propo}
+    $SAT \in \textsc{Dsr}$
+\end{propo}
+\begin{proof}
+    Let $F$ a CNF-formula.
+    $$
+        F=\bigwedge\limits_{i=1}^m \bigvee\limits_{j=1}^{n_i} x_{i,j}^*
+    $$
+    
+    where $x_{i,j}^*$ represent $x_{i,j}$ or $\neg x_{i,j}$ according with the indexes $i$ and $j$.
+    
+    $F \in SAT$ if and only if one of the $\left(x_{m,k} \wedge \bigwedge\limits_{i=1}^{m-1} \bigvee\limits_{j=1}^{n_i} x_{i,j}^* \right)_{k\in\llbracket 1,n_m\rrbracket} \in \left(SAT^{<\vert F \vert}\right)^{n_m    }$ is in SAT. We can test that in polynomial time.
+\end{proof}
+\begin{corol}
+    $\NP$-complete $\subseteq \textsc{Dsr}$
+\end{corol}
+
+\begin{propo}
+    $\textsc{Dsr} \subseteq \pSpace$
+\end{propo}
+\begin{proof}
+    Let $\L \in \textsc{Dsr}$. Given an input $x$, we simulate the polyntime computation that (with queries) decides $\L$, and recursively compute the answer to the each query as it is made. Since the recursive calls are all on strings shorter than $\vert x \vert$, we will eventually reach the base case in which we query strings of length 1. The program we are describing will simply have the answers to these (constant number of) length 1 queries hard-coded. The depth of the recursion is at most $\vert x \vert$, and at each level of recursion, we need to remember the state which requires space at most $p(\vert x\vert)$ where $p$ is a polynomial. This last point holds because the basic computation runs in polynomial time, and hence polynomial space. Thus the overall procedure runs in $\pSpace$.
+\end{proof}
+
 \section{Space hierarchy theorem}
 
 \begin{thm}\label{6:1}
@@ -237,6 +289,7 @@ We note $M$ a deterministic \textsc{Turing} machine. $M$'s computation:
   
   In conclusion, there exists no machine $N$ that runs in space $\cplx{g(n)}$ and recognizes $\L(M)$. Since we have proved $\L(M) \in \dSpace(f(n))$, we obtained $\dSpace (g(n)) \subsetneq \dSpace(f(n))$.
 \end{proof}
+
 
 \section{Polynomial hierarchy}
 

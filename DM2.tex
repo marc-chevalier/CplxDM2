@@ -294,5 +294,41 @@ We note $M$ a deterministic \textsc{Turing} machine. $M$'s computation:
 
 \section{Polynomial hierarchy}
 
+\begin{lemma}
+    $\P^{SAT} = \Delta_2^P$
+\end{lemma}
+\begin{proof}
+    Since $SAT$ is $\NP$-complete, all $\NP$ language is \textsc{Karp}-reducible to $SAT$, so $\P^{SAT} = \P^\NP$
+\end{proof}
+
+\begin{lemma}
+    $\NP^{SAT} = \Sigma_2^P$
+\end{lemma}
+\begin{proof}
+    $\NP^{SAT} = \NP^\NP$
+\end{proof}
+
+\begin{lemma}
+    $\Delta_2^P = \Sigma_2^P \Rightarrow \Sigma_2^P \subseteq \Pi_2^P$
+\end{lemma}
+\begin{proof}
+    Indeed $\Delta_2^P = \Sigma_2^P \cap \Pi_2^P$.
+\end{proof}
+
+\begin{lemma}
+    $\Sigma_2^P \subseteq \Pi_2^P \Rightarrow \Sigma_2^P = \Pi_2^P$
+\end{lemma}
+\begin{proof}
+    Let us assume $\Sigma_2^P \subseteq \Pi_2^P$. We have equivalently $\Sigma_2^P \subseteq co\Sigma_2^P$, so $\Sigma_2^P = co\Sigma_2^P$ and $\Sigma_2^P = \Pi_2^P$.
+\end{proof}
+
+\begin{thm}
+    $\NP^{SAT}=\P^{SAT} \Rightarrow \Sigma_2^P = \Pi_2^P$
+    
+    ie. polynomial hierarchy collapse.
+\end{thm}
+\begin{proof}
+    Just combine the previous lemmas.
+\end{proof}
 
 \end{document}

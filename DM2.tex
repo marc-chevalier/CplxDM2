@@ -80,7 +80,7 @@ If we have an assignment of the $NAE-3-SAT$, we take the vertices which are true
 
 Reciprocally, if we have a cut of size $\geqslant 5m$.
 
-If we have no pair $(x_i, \neg x_i)$ on the same size, we have a valid assignment.
+If we have no pair $(x_i, \neg x_i)$ on the same side, we have a valid assignment.
 
 If there is a such pair, we can move one of them on the opposite side without decreasing the size of the cut. Let $n_i$ the number of edges between $x_i$ and $\neg x_i$. We note $a$ the number of edges which $x_i$ is an extremity and which the other is in the opposite side. We note $b$ the number of edges between $b$ and a vertex of the opposite size. We know that $a+b \leqslant 2n_i$. If we move $x_i$ in the opposite size, the cut gains $n_i-a$ edges. If $\neg x_i$ go to the opposite side, it gains $n_i-b$. $\max(n_i-a,n_i-b)\geqslant 0$, so we can move one of these vertices to the opposite side without decreasing the size of the cut. We redo this transformation until we reach a cut of the first case (at most $m$ times).
 

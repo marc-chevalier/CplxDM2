@@ -38,17 +38,18 @@ This problem is known for being $\pSpace$-complete. It's maybe $\NP$-complete.
 Let be $\varphi$ an instance of $NAE-3-SAT$.
 
 $$
-    \varphi = \bigwedge\limits_{i=1}^n \left(x_{i,1} \vee x_{i,2} \vee x_{i,3}\right)
+    \varphi = \bigwedge\limits_{i=1}^n \left(x_{i,1}^* \vee x_{i,2}^* \vee x_{i,3}^*\right)
 $$
+where $x_{i,j}^*$ is the literal $x_{i,j}$ or $\neg x_{i,j}$.
 
 We will describe the "not all equal" condition is term of formula.
 
 $$
-    \bigwedge\limits_{i=1}^n \neg(x_{i,1} \wedge x_{i,2} \wedge x_{i,3}) \wedge \neg(\neg x_{i,1} \wedge \neg x_{i,2} \wedge \neg x_{i,3})
+    \bigwedge\limits_{i=1}^n \neg(x_{i,1}^* \wedge x_{i,2}^* \wedge x_{i,3})^* \wedge \neg(\neg x_{i,1}^* \wedge \neg x_{i,2}^* \wedge \neg x_{i,3}^*)
 $$
 using \textsc{De Morgan}'s law:
 $$
-    \psi:=\bigwedge\limits_{i=1}^n (\neg x_{i,1} \vee \neg x_{i,2} \vee \neg x_{i,3}) \wedge (x_{i,1} \vee x_{i,2} \vee x_{i,3})
+    \psi:=\bigwedge\limits_{i=1}^n (\neg x_{i,1}^* \vee \neg x_{i,2}^* \vee \neg x_{i,3}^*) \wedge (x_{i,1}^* \vee x_{i,2}^* \vee x_{i,3}^*)
 $$
 
 $\vert \psi\vert \sim 2\vert \varphi \vert \Rightarrow \vert \psi \vert = \cplx{\vert\varphi\vert}$. 

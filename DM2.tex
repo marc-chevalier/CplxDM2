@@ -198,7 +198,7 @@ We simulate $M$ on $x$ for $k$ steps and accepts if and only if $M$ halts and re
     \textsc{BoundedHalt} is $\Exp$-hard.
 \end{lemma}
 \begin{proof}
-For each language $\L \in \EXP$, we need to give polytime reduction from $\L$ to \textsc{BoundedHalt}. For a given language $\L \in \EXP$, we know there is a \textsc{Turing machine} $M_\L$ that decides A in time $g(n) \leqslant 2^{n^k}$ for a $c\in\NN$.
+For each language $\L \in \EXP$, we need to give polytime reduction from $\L$ to \textsc{BoundedHalt}. For a given language $\L \in \EXP$, we know there is a \textsc{Turing machine} $M_\L$ that decides A in time $g(n) \leqslant 2^{n^c}$ for a $c\in\NN$.
 
 Let $f$ such that $f(w) = \langle M_\L, w, m\rangle$ where $m = 2^{|w|^c}$.
 

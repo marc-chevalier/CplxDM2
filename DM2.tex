@@ -244,7 +244,7 @@ If we actually write the padded input $x\diamondsuit^{2^{\lvert x \rvert^c}}$ on
     
     where $x_{i,j}^*$ represent $x_{i,j}$ or $\neg x_{i,j}$ according with the indexes $i$ and $j$.
     
-    $F \in SAT$ if and only if one of the $\left(x_{m,k} \wedge \bigwedge\limits_{i=1}^{m-1} \bigvee\limits_{j=1}^{n_i} x_{i,j}^* \right)_{k\in\llbracket 1,n_m\rrbracket} \in \left(SAT^{<\vert F \vert}\right)^{n_m    }$ is in SAT. We can test that in polynomial time.
+    $F \in SAT$ if and only if one of the $\left(x_{m,k} \wedge \bigwedge\limits_{i=1}^{m-1} \bigvee\limits_{j=1}^{n_i} x_{i,j}^* \right)_{k\in\llbracket 1,n_m\rrbracket} \in \left(CNF^{<\vert F \vert}\right)^{n_m    }$ is in SAT. We can test that in polynomial time.
 \end{proof}
 \begin{corol}
     $\NP$-complete $\subseteq \textsc{Dsr}$

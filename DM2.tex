@@ -249,6 +249,9 @@ If we actually write the padded input $x\diamondsuit^{2^{\lvert x \rvert^c}}$ on
 \begin{corol}
     $\NP$-complete $\subseteq \textsc{Dsr}$
 \end{corol}
+\begin{proof}
+    Let $\L$ be a $\NP$ language. There exists a polynomial reduction showing that $SAT \leqslant_p \L$. The polynomial $p$ used is an element of $\ZZ[X]$ such that $\lim\limits_{n\to +\infty} p(n) = +\infty$. Consequently, there is a cofinite number of integers $n$ such that $p(n)<p(n+1)$. So, the downward self-reducibility as the same sense even after the reduction, except for a finite number of cases which can be hard-coded in a \textsc{Turing} machine. We conclude that $\L \in \textsc{Dsr}$.
+\end{proof}
 
 \begin{propo}
     $\textsc{Dsr} \subseteq \pSpace$

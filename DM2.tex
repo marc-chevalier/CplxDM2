@@ -143,7 +143,7 @@ So, $\textsc{MaxCut}\in\NP$.
         \begin{itemize}
             \item For each variable in each clause, create a vertex, which we will label with the name of the variable. Therefore there may be multiple vertices with the label $x_i$ or $\neg x_i$, if these variables appear in multiple clauses.
             \item For each clause, add an edge between the three vertices corresponding the variables from that clause.
-            \item For all $i$, add an edge between every pair of vertices with one is labelled with $x_i$ and the other labelled with $x_i$.
+            \item For all $i$, add an edge between every pair of vertices with one is labelled with $x_i$ and the other labelled with $\neg x_i$.
         \end{itemize}
         
         There is a independent set of size $m$ in $G$ if and only if $F$ is satisfiable.    

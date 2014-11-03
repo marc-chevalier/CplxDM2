@@ -35,37 +35,39 @@ This problem is known for being $\pSpace$-complete. It's maybe $\NP$-complete.
    
 \subsection{\texorpdfstring{$NAE-3-SAT$}{NAE-3-SAT}}
 
-Let be $\varphi$ an instance of $NAE-3-SAT$.
+\begin{lemma}
+    $3-SAT \leqslant_p NAE-4-SAT$
+\end{lemma}
+\begin{proof}
+We define a single "reference variable" $z$ for the entire $NAE-SAT$ formula. Then we represent each variable $x_i$ in the $3-SAT$ formula $F$ with a variable $y_i$ in the $NAE-SAT$ formula $F_1$, where $x_i$ is true or false if $y_i \neq z$ or $y_i = z$ respectively. Then we can represent a $3-SAT$ clause $(x_i\vee x_j\vee x_k)$ with a $NAE-4-SAT$ clause $(y_i\vee y_j\vee y_k\vee z)$, since this clause is satisfied if and only if at least one of $y_i$ is different from z, ie., if at least one of the $x_i$ is true. We can similarly represent $x_i$ by $y_i$.
+\end{proof}
+
+\begin{lemma}
+    $NAE-4-SAT\leqslant_p NAE-3-SAT$
+\end{lemma}
+\begin{proof}
+To reduce $NAE-4-SAT$ to $NAE-3-SAT$, we use variables $w$ to break each 4-variable clause into two 3-variable clause:
 
 $$
-    \varphi = \bigwedge\limits_{i=1}^n \left(x_{i,1}^* \vee x_{i,2}^* \vee x_{i,3}^*\right)
-$$
-where $x_{i,j}^*$ is the literal $x_{i,j}$ or $\neg x_{i,j}$.
-
-We will describe the "not all equal" condition is term of formula.
-
-$$
-    \bigwedge\limits_{i=1}^n \neg(x_{i,1}^* \wedge x_{i,2}^* \wedge x_{i,3})^* \wedge \neg(\neg x_{i,1}^* \wedge \neg x_{i,2}^* \wedge \neg x_{i,3}^*)
-$$
-using \textsc{De Morgan}'s law:
-$$
-    \psi:=\bigwedge\limits_{i=1}^n (\neg x_{i,1}^* \vee \neg x_{i,2}^* \vee \neg x_{i,3}^*) \wedge (x_{i,1}^* \vee x_{i,2}^* \vee x_{i,3}^*)
+    y_i\vee y_j\vee y_k\vee z = (y_i \vee y_j \vee w) \wedge (w \vee y_k \vee z)
 $$
 
-$\vert \psi\vert \sim 2\vert \varphi \vert \Rightarrow \vert \psi \vert = \cplx{\vert\varphi\vert}$. 
+That's work exactly by the same way as the proof of $SAT\leqslant_p 3-SAT$.
+\end{proof}
 
-Let $\varpi := \varphi \wedge \psi$. $\varpi$ is an instance of $SAT$ and the reduction is polynomial. If there is an solution to the $SAT$ problem $\varpi$, then $\varphi$ is satisfied and, thanks to $\psi$, the "not all equal" condition is true.
-
-Reciprocally, if there is a solution of the $NAE-3-SAT$ problem $\varphi$, then this assignation makes $\xi$ true.
-
-Consequently, $SAT \leqslant_p NAE-3-SAT$ and $NAE-3-SAT$ is $NP$-hard. 
-
-Moreover, $NAE-3-SAT$ is clearly $NP$: a valid assignation is a sufficient witness. We can check in polynomial time if this assignation makes the formula true and if the "not all equal" condition is satisfied. Then $NAE-3-SAT$ is $NP$-complete.
+\begin{propo}
+    $SAT \leqslant_p NAE-3-SAT$.
+\end{propo}
+\begin{corol}
+    $NAE-3-SAT$ is $NP$-hard.
+\end{corol}
 
 \begin{theorem}
     $NAE-3-SAT$ is $\NP$-complete
 \end{theorem}
-   
+\begin{proof}
+$NAE-3-SAT$ is clearly $NP$: a valid assignation is a sufficient witness. We can check in polynomial time if this assignation makes the formula true and if the "not all equal" condition is satisfied. Then $NAE-3-SAT$ is $NP$-complete.
+\end{proof}
 
 \subsection{\textsc{MaxCut}}
 
@@ -159,13 +161,13 @@ So, $\textsc{MaxCut}\in\NP$.
         $$x\in A\Leftrightarrow(G_3, k)\in DP$$
     \end{lemma}
     
-    ($\Rightarrow$): Suppose $x\in A$. Then by (2)$x\in L_1 \cap L_2$, so by (3) and (6) we conclude the maximum independent set of $G_3=G'_1\sqcup  G'_2$ is $2m_1+m_2-1 =k$.
+    ($\Rightarrow$): Suppose $x\in A$. Then $x\in L_1 \setminus L_2$, so we conclude the maximum independent set of $G_3=G'_1\sqcup  G'_2$ is $2m_1+m_2-1 =k$.
     
     ($\Leftarrow$): Suppose $x \not\in A$. There are three cases:
     \begin{itemize}
         \item $x\in L_1 \cap L_2\Rightarrow maxindset(G_3) = 2m_1+m_2> k$.
-        \item $x\in L_1 \cap L_2\Rightarrow maxindset(G_3)\leqslant 2m_1+m_2-2< k$
-        \item $x\in L_1 \cap L_2\Rightarrow maxindset(G_2) = 2m_1+m_2-3< k$
+        \item $x\not\in L_1\Rightarrow maxindset(G_3)\leqslant 2m_1+m_2-2< k$
+        %\item $x\in L_1 \cap L_2\Rightarrow maxindset(G_2) = 2m_1+m_2-3< k$
     \end{itemize}
 \end{proof}
 

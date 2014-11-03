@@ -54,7 +54,7 @@ $$
 
 $\vert \psi\vert \sim 2\vert \varphi \vert \Rightarrow \vert \psi \vert = \cplx{\vert\varphi\vert}$. 
 
-Let $\varpi := \varphi \wedge \psi$. $\varpi$ is an instance of $SAT$ and the reduction is polynomial. If there is an solution to the $SAT$ problem $\xi$, then $\varphi$ is satisfied and, thanks to $\psi$, the "not all equal" condition is true.
+Let $\varpi := \varphi \wedge \psi$. $\varpi$ is an instance of $SAT$ and the reduction is polynomial. If there is an solution to the $SAT$ problem $\varpi$, then $\varphi$ is satisfied and, thanks to $\psi$, the "not all equal" condition is true.
 
 Reciprocally, if there is a solution of the $NAE-3-SAT$ problem $\varphi$, then this assignation makes $\xi$ true.
 
@@ -315,7 +315,7 @@ We note $M$ a deterministic \textsc{Turing} machine. $M$'s computation:
     $\Delta_2^P = \Sigma_2^P \Rightarrow \Sigma_2^P \subseteq \Pi_2^P$
 \end{lemma}
 \begin{proof}
-    Indeed $\Delta_2^P = \Sigma_2^P \cap \Pi_2^P$.
+    Indeed $\Delta_2^P \subseteq \Sigma_2^P \cap \Pi_2^P$.
 \end{proof}
 
 \begin{lemma}

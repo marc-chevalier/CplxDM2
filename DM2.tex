@@ -252,7 +252,24 @@ If we actually write the padded input $x\diamondsuit^{2^{\lvert x \rvert^c}}$ on
     $\NP$-complete $\subseteq \textsc{Dsr}$
 \end{corol}
 \begin{proof}
-    Let $\L$ be a $\NP$ language. There exists a polynomial reduction showing that $SAT \leqslant_p \L$. The polynomial $p$ used is an element of $\ZZ[X]$ such that $\lim\limits_{n\to +\infty} p(n) = +\infty$. Consequently, there is a cofinite number of integers $n$ such that $p(n)<p(n+1)$. So, the downward self-reducibility as the same sense even after the reduction, except for a finite number of cases which can be hard-coded in a \textsc{Turing} machine. We conclude that $\L \in \textsc{Dsr}$.
+    Let $\L$ be an $\NP$-complete language. 
+    
+    There are two polynomial reductions showing that $SAT =_p \L$. The polynomials $p$ and $q$ used are elements of $\ZZ[X]$ such that $\lim\limits_{n\to +\infty} p(n) = \lim\limits_{n\to +\infty} q(n) = +\infty$. Consequently, there is a cofinite number of integers $n$ such that $p(n)<p(n+1) \wedge q(n)<q(n+1)$.  So, the downward self-reducibility has the same sense even after the reduction, except for a finite number of cases which can be hard-coded in a \textsc{Turing} machine.
+    
+    So, given a word $x$, to decide $x\in\L$, we can decide the equivalent problem $\phi(x)\in SAT$. The queries the machine needs to decide this problem have the form $y\in SAT$ with $\vert z \vert < \vert \phi(x) \vert$. So, thanks to the other reduction, there are equivalent problems of the form $\psi(y) \in \L$ and, except for a finite (but potentially huge) number of case, $\vert \psi(y) \vert < \vert x \vert$.
+    
+    We conclude that $\L \in \textsc{Dsr}$.
+\end{proof}
+
+\begin{conjecture}
+    $\NP \subseteq \textsc{Dsr}$
+\end{conjecture}
+\begin{proof}[Ideas]
+    Let $\L\in\NP$. 
+    
+    I want to say that $\L$ is no more difficult than $SAT$ so it can't need more complex calculation to be solved.
+    
+    But I can't use the previous proof because there is no converse reduction to assure the monotony and that I can have a correspondent problem in a language for each problem in the other. And here, I have only one direction.
 \end{proof}
 
 \begin{propo}
